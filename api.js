@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const UserRoutes = require("./Routes/UserRoutes");
 const dbUrl =
-  "mmongodb+srv://arunramasamy46:arunramasamy46@cluster0.bscgjfi.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://arunramasamy46:arunramasamy46@cluster0.xxmzqhp.mongodb.net/?retryWrites=true&w=majority";
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
