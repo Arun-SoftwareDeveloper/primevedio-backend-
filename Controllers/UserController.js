@@ -93,7 +93,7 @@ async function forgotPassword(req, res) {
           .json({ error: "Failed to send reset password email" });
       }
       console.log("Email sent: " + info.response);
-      res.status(200).json({ message: "Reset password email sent" });
+      return res.status(200).json({ message: "Reset password email sent" });
     });
   } catch (error) {
     console.log("Error Occurred" + " " + error);
