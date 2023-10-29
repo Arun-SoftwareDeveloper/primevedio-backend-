@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const UserRoutes = require("./Routes/UserRoutes");
-const dbUrl = "mongodb://0.0.0.0:27017/primevedio";
+const dbUrl =
+  "mmongodb+srv://arunramasamy46:arunramasamy46@cluster0.bscgjfi.mongodb.net/?retryWrites=true&w=majority";
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
