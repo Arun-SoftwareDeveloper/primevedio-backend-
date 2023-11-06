@@ -83,7 +83,7 @@ async function forgotPassword(req, res) {
       to: user.email,
       subject: "Reset your password",
       html: `<h1>Hello ${user.firstName}</h1>
-<a href="http://localhost:3000/forgotPassword/${token}">Click here </a>`,
+<a href="https://primevedio-backend.onrender.com/resetPassword${token}">Click here </a>`,
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -100,4 +100,6 @@ async function forgotPassword(req, res) {
     return res.status(402).send({ message: "Internal Server Error" });
   }
 }
+
+// async function ResetPassword() {}
 module.exports = { registerUser, loginUser, forgotPassword };
