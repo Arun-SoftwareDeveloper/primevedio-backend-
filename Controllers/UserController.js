@@ -83,7 +83,7 @@ async function forgotPassword(req, res) {
       to: user.email,
       subject: "Reset your password",
       html: `<h1>Hello ${user.firstName}</h1>
-<a href="https://primevedio-backend.onrender.com/resetPassword/${token}">Click here </a>`,
+<a href="http://localhost:4000/resetPassword/${token}">Click here </a>`,
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
