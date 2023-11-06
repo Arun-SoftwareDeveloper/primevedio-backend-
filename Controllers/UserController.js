@@ -83,7 +83,7 @@ async function forgotPassword(req, res) {
       to: user.email,
       subject: "Reset your password",
       html: `<h1>Hello ${user.firstName}</h1>
-<a href="https://primevedio-backend.onrender.com/resetPassword${token}">Click here </a>`,
+<a href="https://primevedio-backend.onrender.com/resetPassword/${token}">Click here </a>`,
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -100,6 +100,38 @@ async function forgotPassword(req, res) {
     return res.status(402).send({ message: "Internal Server Error" });
   }
 }
+async function resetPassword(req, res) {
+  try {
+    const { token, newPassword } = req.body; // Assuming the token is in the request body
 
-// async function ResetPassword() {}
-module.exports = { registerUser, loginUser, forgotPassword };
+    // Find the user based on the token (you may need to adjust your data model)
+    const user = await User.findOne({ resetToken: token });
+
+    if (!user) {
+      console.log("User not found or invalid token");
+      return res
+        .status(404)
+        .send({ message: "User not found or invalid token" });
+    }
+
+    // Generate a new hashed password for the user
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password with the new hashed password
+    user.password = hashedPassword;
+
+    // Clear the reset token (assuming you store it in your data model)
+    user.resetToken = null;
+
+    // Save the user's updated information
+    await user.save();
+
+    console.log("Password reset successfully");
+    return res.status(200).send({ message: "Password reset successfully" });
+  } catch (error) {
+    console.log("Error Occurred: " + error);
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
+module.exports = { registerUser, loginUser, forgotPassword, resetPassword };
